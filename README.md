@@ -2,6 +2,11 @@
 
 A seaweedFS setup for development.
 
+# Get started
+```bash
+$ docker compose up -d
+```
+
 # Containers
 
 ## seaweedfs
@@ -44,7 +49,7 @@ Postman can generate AWS authorization header for you.
 ### Definition
 
 ```text
-PUT s3.swfs.lndo.site/{bucket}/{key}
+PUT https://s3.swfs.lndo.site/{bucket}/{key}
 ```
 
 ### Headers
@@ -62,7 +67,7 @@ Binary file data.
 ### Definition
 
 ```text
-GET s3.swfs.lndo.site/{bucket}/{key}
+GET https://s3.swfs.lndo.site/{bucket}/{key}
 ```
 
 ### Headers
@@ -76,7 +81,7 @@ AWS Authorization signature.
 ### Definition
 
 ```text
-GET s3.swfs.lndo.site/{bucket}/{key}?<presign-signature>
+GET https://s3.swfs.lndo.site/{bucket}/{key}?<presign-signature>
 ```
 
 ### Get presign signature
