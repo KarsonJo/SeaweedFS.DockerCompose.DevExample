@@ -1,0 +1,27 @@
+name: swfs
+services:
+  seaweedfs:
+    image: chrislusf/seaweedfs:latest
+    ports:
+      - "8333:8333"
+    command: "server -s3 -s3.config=/etc/seaweedfs/s3.json"
+    volumes:
+      - ./s3.json:/etc/seaweedfs/s3.json
+      - seaweedfs_data:/data
+  aws:
+    image: amazon/aws-cli:latest
+    entrypoint: tail -f /dev/null
+    environment:
+      - AWS_ENDPOINT_URL=http://seaweedfs:8333
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=P@ssw0rd
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./ssl:/etc/ssl:ro
+volumes:
+  seaweedfs_data:
